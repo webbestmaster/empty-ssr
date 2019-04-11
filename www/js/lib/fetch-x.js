@@ -1,6 +1,6 @@
 // @flow
 
-/* global window, fetch */
+import fetch from "isomorphic-fetch";
 
 const promiseCache = {};
 
@@ -27,8 +27,7 @@ export function fetchX<ExpectedResponseType>(
         return promiseCache[cacheProperty];
     }
 
-    promiseCache[cacheProperty] = window
-        .fetch(url, options)
+    promiseCache[cacheProperty] = fetch(url, options)
         .then((rawResult: Response): Promise<ExpectedResponseType> => rawResult.json())
         .catch(
             (error: Error): Error => {

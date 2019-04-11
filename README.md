@@ -9,6 +9,7 @@ npm i isomorphic-fetch
 npm i react-helmet
 npm i @babel/core
 npm i @babel/node
+npm i babel-plugin-css-modules-transform
 ```
 
 ### Run Server

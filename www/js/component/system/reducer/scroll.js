@@ -1,7 +1,5 @@
 // @flow
 
-/* global window */
-
 import {systemConst} from '../const';
 import type {ActionDataType} from '../../../redux-store-provider/type';
 

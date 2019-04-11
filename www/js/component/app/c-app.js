@@ -40,3 +40,15 @@ export function App(): Node {
         /* eslint-enable react/jsx-max-depth */
     );
 }
+
+export function InnerApp(): Node {
+    return (
+        <Switch>
+            <Route component={Login} exact path={routes.login}/>
+
+            <Route component={Home} exact path={routes.index}/>
+
+            <Route component={PageNotFound}/>
+        </Switch>
+    )
+}

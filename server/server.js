@@ -10,28 +10,33 @@ import routes from "./routes";
 import Layout from "./components/Layout";
 import createStore, { initializeSession } from "./store";
 
+import {createStoreSsr} from "../www/js/redux-store-provider/provider";
+import {InnerApp} from "../www/js/component/app/c-app";
+
 const app = express();
 
-app.use( express.static( path.resolve( __dirname, "../dist" ) ) );
+app.use('/static', express.static( "dist" ) );
 
 app.get( "/*", ( req, res ) => {
     const context = { };
-    const store = createStore( );
+    const store = createStoreSsr( );
 
-    store.dispatch( initializeSession( ) );
+    // store.dispatch( initializeSession( ) );
 
-    const dataRequirements =
+    const dataRequirements = [];
+/*
         routes
             .filter( route => matchPath( req.url, route ) ) // filter matching paths
             .map( route => route.component ) // map to components
             .filter( comp => comp.serverFetch ) // check if components have data requirement
             .map( comp => store.dispatch( comp.serverFetch( ) ) ); // dispatch data requirement
+*/
 
     Promise.all( dataRequirements ).then( ( ) => {
         const jsx = (
             <ReduxProvider store={ store }>
                 <StaticRouter context={ context } location={ req.url }>
-                    <Layout />
+                    <InnerApp/>
                 </StaticRouter>
             </ReduxProvider>
         );
@@ -59,10 +64,12 @@ function htmlTemplate( reactDom, reduxState, helmetData ) {
         
         <body>
             <div id="app">${ reactDom }</div>
+            <div class="js-app-wrapper app-wrapper">${ reactDom }</div>
             <script>
                 window.REDUX_DATA = ${ JSON.stringify( reduxState ) }
             </script>
-            <script src="./app.bundle.js"></script>
+            <link href="/static/main.3e1a61.css" rel="stylesheet"/>
+            <script src="/static/main.3e1a61.js"></script>
         </body>
         </html>
     `;

@@ -1,7 +1,5 @@
 // @flow
 
-/* global window */
-
 import {combineReducers} from 'redux';
 
 import type {ActionDataType} from '../../../redux-store-provider/type';

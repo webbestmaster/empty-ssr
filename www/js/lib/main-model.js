@@ -1,7 +1,5 @@
 // @flow
 
-/* global module */
-
 /* eslint-disable complexity */
 
 /* eslint consistent-this: ["error", "model"] */

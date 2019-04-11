@@ -1,6 +1,6 @@
 // @flow
 
-/* global localStorage */
+/* global window, localStorage */
 
 import type {LocaleNameType} from './const';
 import {localeConst} from './const';
@@ -13,8 +13,10 @@ export type SetLocaleType = {|
 |};
 
 export function setLocale(localeName: LocaleNameType): SetLocaleType {
-    console.log('---> write to localStorage', localeConst.key.localStorage.localeName, localeName);
-    localStorage.setItem(localeConst.key.localStorage.localeName, localeName);
+    if (typeof window !== 'undefined') {
+        console.log('---> write to localStorage', localeConst.key.localStorage.localeName, localeName);
+        localStorage.setItem(localeConst.key.localStorage.localeName, localeName);
+    }
 
     return {
         type: localeConst.action.type.setLocale,

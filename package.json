@@ -10,8 +10,8 @@
     "webpack": "webpack --mode=development --progress",
     "check": "npm run eslint; npm run stylelint; npm run flow;",
     "check:fix": "npm run prettier; npm run eslint:fix; npm run stylelint:fix; npm run flow;",
-    "eslint": "eslint .",
-    "eslint:fix": "eslint . --fix",
+    "eslint": "eslint ./www",
+    "eslint:fix": "eslint ./www --fix",
     "stylelint": "stylelint ./**/*.scss",
     "stylelint:fix": "stylelint ./**/*.scss --fix",
     "flow": "flow stop; flow;",
@@ -33,6 +33,7 @@
   },
   "homepage": "https://github.com/webbestmaster/empty-ssr#readme",
   "dependencies": {
+    "babel-plugin-css-modules-transform": "^1.6.2",
     "classnames": "^2.2.6",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

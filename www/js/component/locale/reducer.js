@@ -1,6 +1,6 @@
 // @flow
 
-/* global localStorage, navigator */
+/* global window, localStorage, navigator */
 
 import {combineReducers} from 'redux';
 
@@ -11,6 +11,10 @@ import {localeConst} from './const';
 
 // eslint-disable-next-line complexity
 function getLocaleName(): LocaleNameType {
+    if (typeof window === 'undefined') {
+        return localeConst.defaults.localeName;
+    }
+
     const savedLocaleName = localStorage.getItem(localeConst.key.localStorage.localeName);
     const localeNameList: Array<LocaleNameType> = localeConst.localeNameList;
 
@@ -47,7 +51,9 @@ function getLocaleName(): LocaleNameType {
 
 const initialLocaleName = getLocaleName();
 
-localStorage.setItem(localeConst.key.localStorage.localeName, initialLocaleName);
+if (typeof window !== 'undefined') {
+    localStorage.setItem(localeConst.key.localStorage.localeName, initialLocaleName);
+}
 
 export type LocaleType = {|
     +name: LocaleNameType,

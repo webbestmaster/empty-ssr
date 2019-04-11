@@ -1,6 +1,6 @@
 // @flow
 
-/* global window, document */
+/* global window */
 
 /* eslint consistent-this: ["error", "view"] */
 
@@ -62,10 +62,16 @@ class System extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const view = this;
         const {props, state} = view;
 
+        if (typeof window === 'undefined') {
+            console.log('window is undefined');
+            return;
+        }
+
         window.addEventListener(
             'resize',
             () => {
-                const {clientWidth, clientHeight} = document.documentElement || {clientWidth: 800, clientHeight: 600};
+                const {documentElement} = window.document;
+                const {clientWidth, clientHeight} = documentElement || {clientWidth: 800, clientHeight: 600};
 
                 props.onResize(clientWidth, clientHeight);
             },

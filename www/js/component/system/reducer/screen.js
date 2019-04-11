@@ -1,6 +1,6 @@
 // @flow
 
-/* global document */
+/* global window */
 
 import {systemConst} from '../const';
 import type {ActionDataType} from '../../../redux-store-provider/type';
@@ -77,7 +77,15 @@ function getScreenState(width: number, height: number): ScreenType {
     };
 }
 
-const {clientWidth, clientHeight} = document.documentElement || {clientWidth: 800, clientHeight: 600};
+let clientWidth = 800;
+
+let clientHeight = 600;
+
+if (typeof window !== 'undefined' && window.document.documentElement) {
+    console.log('window is NOT undefined');
+    clientWidth = window.document.documentElement.clientWidth;
+    clientHeight = window.document.documentElement.clientHeight;
+}
 
 const defaultScreenState = getScreenState(clientWidth, clientHeight);
 

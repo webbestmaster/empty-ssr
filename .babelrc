@@ -16,6 +16,12 @@
         "development": {
             "plugins": [
                 [
+                    "css-modules-transform", {
+                    "generateScopedName": "[hash:6]",
+                    "extensions": [".css", ".scss"]
+                }
+                ],
+                [
                     "@babel/plugin-proposal-decorators",
                     {
                         "legacy": true

@@ -28,3 +28,7 @@ export function ReduxStoreProvider(props: PassedPropsType): Node {
 
     return <Provider store={store}>{children}</Provider>;
 }
+
+export function createStoreSsr() {
+    return createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
+}
